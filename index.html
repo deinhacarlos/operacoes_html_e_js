@@ -1,0 +1,120 @@
+<!--1 - Com base no exemplo do calculo simples apresentado 
+com a utilização de HTML e Java Script, crie os itens 
+necessários para a realização das operações de multiplicação, 
+subtração e divisão. Além da soma que já foi apresentada em aula.
+--> 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .input-group input {
+            margin: 0 5px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        .input-group span {
+            font-size: 24px;
+            margin: 0 5px;
+        }
+        .btn {
+            display: inline-block;
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .btn:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="formulario" autocomplete="off">
+            <fieldset>
+                <legend>Calculadora Simples</legend>
+                <div class="input-group">
+                    <label for="num1">Valor 1:</label>
+                    <input id="num1" type="text">
+                    <span>-</span>
+                    <label for="num2">Valor 2:</label>
+                    <input id="num2" type="text">
+                </div>
+                <br>
+                <input type="radio" name="operacao" value="soma" checked> Soma
+                <input type="radio" name="operacao" value="subtracao"> Subtração
+                <input type="radio" name="operacao" value="multiplicacao"> Multiplicação
+                <input type="radio" name="operacao" value="divisao"> Divisão
+                <br><br>
+                <input class="btn" type="button" value="Calcular" onclick="calcular()"><br>
+                <p id="resultado"></p>
+            </fieldset>
+        </form>
+    </div>
+    <script>
+        function calcular() {
+            var num1 = Number(document.getElementById("num1").value);
+            var num2 = Number(document.getElementById("num2").value);
+            var operacao = document.querySelector('input[name="operacao"]:checked').value;
+            var resultado;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                alert("Por favor, insira números válidos.");
+                return;
+            }
+
+            switch (operacao) {
+                case "soma":
+                    resultado = num1 + num2;
+                    break;
+                case "subtracao":
+                    resultado = num1 - num2;
+                    break;
+                case "multiplicacao":
+                    resultado = num1 * num2;
+                    break;
+                case "divisao":
+                    if (num2 === 0) {
+                        alert("Divisão por zero não é permitida.");
+                        return;
+                    }
+                    resultado = num1 / num2;
+                    break;
+                default:
+                    alert("Selecione uma operação.");
+                    return;
+            }
+
+            var elemResult = document.getElementById("resultado");
+            elemResult.textContent = "O resultado é: " + resultado;
+        }
+    </script>
+</body>
+</html>
